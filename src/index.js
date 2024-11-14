@@ -2,7 +2,6 @@
 const runSDK = ({
   account_id,
   asst_id,
-  baseUrl,
   params={}
 }) => {
  

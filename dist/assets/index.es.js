@@ -1,14 +1,13 @@
-const a = ({
+const d = ({
   account_id: r,
   asst_id: s,
-  baseUrl: d,
-  params: l = {}
+  params: i = {}
 }) => {
   if (r && s) {
-    const o = `https://chatbot-frontend-dacoid.vercel.app/embed/${r}/${s}`, c = (t) => Object.keys(t).map((i) => `${encodeURIComponent(i)}=${encodeURIComponent(t[i])}`).join("&");
+    const o = `https://chatbot-frontend-dacoid.vercel.app/embed/${r}/${s}`, c = (t) => Object.keys(t).map((l) => `${encodeURIComponent(l)}=${encodeURIComponent(t[l])}`).join("&");
     let n;
-    if (Object.keys(l).length > 0)
-      n = `${o}?${c(l)}`;
+    if (Object.keys(i).length > 0)
+      n = `${o}?${c(i)}`;
     else {
       const t = window.location.search;
       n = t ? `${o}${t}` : o;
@@ -21,5 +20,5 @@ const a = ({
     ), null;
 };
 window.dacoidSDK = {
-  init: a
+  init: d
 };
