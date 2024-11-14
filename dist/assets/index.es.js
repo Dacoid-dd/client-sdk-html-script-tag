@@ -1,14 +1,14 @@
-const d = ({
-  account_id: s,
-  asst_id: c,
-  baseUrl: o,
-  params: r = {}
+const a = ({
+  account_id: r,
+  asst_id: s,
+  baseUrl: d,
+  params: l = {}
 }) => {
-  if (s && c) {
-    const l = (t) => Object.keys(t).map((i) => `${encodeURIComponent(i)}=${encodeURIComponent(t[i])}`).join("&");
+  if (r && s) {
+    const o = `https://chatbot-frontend-dacoid.vercel.app/embed/${r}/${s}`, c = (t) => Object.keys(t).map((i) => `${encodeURIComponent(i)}=${encodeURIComponent(t[i])}`).join("&");
     let n;
-    if (Object.keys(r).length > 0)
-      n = `${o}?${l(r)}`;
+    if (Object.keys(l).length > 0)
+      n = `${o}?${c(l)}`;
     else {
       const t = window.location.search;
       n = t ? `${o}${t}` : o;
@@ -20,6 +20,6 @@ const d = ({
       "Account and Assistant id's are required."
     ), null;
 };
-window.vapiSDK = {
-  init: d
+window.dacoidSDK = {
+  init: a
 };
