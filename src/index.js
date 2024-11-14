@@ -1,82 +1,53 @@
-import Vapi from "@vapi-ai/web";
-import { createButtonElement, createButtonStateHandler } from "./button";
-import { defaultListeners } from "./listeners";
 
 const runSDK = ({
-  apiKey = "",
-  assistant,  
-  assistantOverrides,
-  squad,
-  config = {},
-  ...restOptions 
+  account_id,
+  asst_id,
+  baseUrl,
+  params={}
 }) => {
-  function deepMerge(defaultConfig, userConfig) {
-    const mergedConfig = { ...defaultConfig };
-    Object.keys(userConfig).forEach((key) => {
-      if (
-        typeof userConfig[key] === "object" &&
-        userConfig[key] !== null &&
-        !Array.isArray(userConfig[key])
-      ) {
-        mergedConfig[key] = deepMerge(
-          defaultConfig[key] || {},
-          userConfig[key]
-        );
-      } else {
-        mergedConfig[key] = userConfig[key];
-      }
-    });
-    return mergedConfig;
-  }
+ 
+  if (account_id && asst_id ) {
+    const baseUrl =  `https://chatbot-frontend-dacoid.vercel.app/embed/${account_id}/${asst_id}`
+    // Helper function to format parameters as a query string
+    const formatParams = (paramObj) => {
+      return Object.keys(paramObj)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(paramObj[key])}`)
+        .join('&');
+    };
 
-  const defaultConfig = {
-    position: "bottom",
-    offset: "40px",
-    width: "50px",
-    height: "50px",
-    idle: {
-      color: `rgb(93, 254, 202)`,
-      type: "round",
-      title: "Have a quick question?",
-      subtitle: "Talk with our AI assistant",
-      icon: `https://unpkg.com/lucide-static@0.321.0/icons/phone.svg`,
-    },
-    loading: {
-      color: `rgb(93, 124, 202)`,
-      type: "round",
-      title: "Connecting...",
-      subtitle: "Please wait",
-      icon: `https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg`,
-    },
-    active: {
-      color: `rgb(255, 0, 0)`,
-      type: "round",
-      title: "Call is in progress...",
-      subtitle: "End the call.",
-      icon: `https://unpkg.com/lucide-static@0.321.0/icons/phone-off.svg`,
-    },
-  };
-  const buttonConfig = deepMerge(defaultConfig, config);
-  if (apiKey && (assistant || squad)) {
-    const vapi = new Vapi(apiKey);
-    const buttonElement = createButtonElement(buttonConfig);
+    // Determine the iframe URL based on provided params or current URL parameters
+    let iframeUrl;
+    if (Object.keys(params).length > 0) {
+      // Use provided params
+      iframeUrl = `${baseUrl}?${formatParams(params)}`;
+    } else {
+      // Use current URL parameters if no params are provided
+      const currentUrlParams = window.location.search;
+      iframeUrl = currentUrlParams ? `${baseUrl}${currentUrlParams}` : baseUrl;
+    }
+            // Create the iframe element
+            const iframe = document.createElement('iframe');
+            iframe.src = iframeUrl;
+            iframe.style.position = 'fixed';
+            iframe.style.bottom = '10px';
+            iframe.style.right = '10px';
+            iframe.style.height = '100%';
+            iframe.style.maxHeight = '600px';
+            iframe.style.overflowY = 'auto';
+            iframe.style.width = '700px';
+            iframe.frameBorder = '0';
 
-    const buttonStateHandler = createButtonStateHandler(buttonConfig);
-    document.body.appendChild(buttonElement);
-
-    buttonStateHandler(buttonElement, "idle");
-    defaultListeners(vapi, buttonElement, assistant, assistantOverrides, squad, buttonStateHandler);
-
-    window.vapiSDK.vapi = vapi;
-    return vapi;
+            // Append the iframe to the body
+            document.body.appendChild(iframe);
   } else {
     console.error(
-      "API Key and Assistant Configurations are required. are required"
+      "Account and Assistant id's are required."
     );
     return null;
   }
+
 };
 
-window.vapiSDK = {
-  run: runSDK,
+window.dacoidSDK = {
+  init: runSDK,
 };
