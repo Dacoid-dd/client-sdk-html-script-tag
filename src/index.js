@@ -34,6 +34,7 @@ const runSDK = ({
             iframe.style.maxHeight = '600px';
             iframe.style.overflowY = 'auto';
             iframe.style.width = '700px';
+            iframe.style.zIndex = '100';
             iframe.frameBorder = '0';
 
             // Append the iframe to the body
