@@ -33,7 +33,7 @@ const runSDK = ({
             iframe.style.height = '100%';
             iframe.style.maxHeight = '600px';
             iframe.style.overflowY = 'auto';
-            iframe.style.width = '700px';
+            iframe.style.width = 'auto';
             iframe.style.zIndex = '100';
             iframe.frameBorder = '0';
 
