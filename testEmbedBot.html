@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Embed Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #bot-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Embed Bot Test</h1>
+        <p>Below is the embedded bot for testing purposes:</p>
+        <div id="bot-container"></div>
+    </div>
+
+    <script>
+
+
+        (function (d, t) {
+            var g = document.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            g.src =
+                "https://cdn.jsdelivr.net/gh/Dacoid-dd/client-sdk-html-script-tag@latest/dist/assets/index.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+
+            g.onload = function () {
+                window.dacoidSDK.init({
+                    account_id: '21a9d5df-42b5-477e-9d22-29f3894d2982',
+                    asst_id: 'asst_3zrM2khChzeU3hE0U86IDPA7' //use params:{} to add custom variables
+                });
+            };
+        })(document, "script");
+
+
+    </script>
+</body>
+
+</html>
