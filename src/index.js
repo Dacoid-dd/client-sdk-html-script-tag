@@ -2,9 +2,9 @@
 const runSDK = ({
   account_id,
   asst_id,
+  params={},
   width,
-  height,
-  params={}
+  height
 }) => {
  
   if (account_id && asst_id ) {
