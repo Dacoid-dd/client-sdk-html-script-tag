@@ -2,6 +2,8 @@
 const runSDK = ({
   account_id,
   asst_id,
+  width,
+  height,
   params={}
 }) => {
  
@@ -30,10 +32,10 @@ const runSDK = ({
             iframe.style.position = 'fixed';
             iframe.style.bottom = '10px';
             iframe.style.right = '10px';
-            iframe.style.height = '100%';
+            iframe.style.height = height || '100%';
             iframe.style.maxHeight = '600px';
             iframe.style.overflowY = 'auto';
-            iframe.style.width = 'auto';
+            iframe.style.width = width || 'auto';
             iframe.style.zIndex = '100';
             iframe.frameBorder = '0';
 
