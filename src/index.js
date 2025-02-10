@@ -1,4 +1,3 @@
-
 const runSDK = ({
   account_id,
   asst_id,
@@ -7,7 +6,6 @@ const runSDK = ({
   height,
   env
 }) => {
- 
   if (account_id && asst_id ) {
     const envUrl = env === 'production' ? 'https://dashboard.dacoidchat.com' : (env === 'local' ? 'http://localhost:5173':'https://chatbot-frontend-i8ao.vercel.app')
     const baseUrl =  `${envUrl}/embed/${account_id}/${asst_id}`
@@ -28,25 +26,35 @@ const runSDK = ({
       const currentUrlParams = window.location.search;
       iframeUrl = currentUrlParams ? `${baseUrl}${currentUrlParams}` : baseUrl;
     }
-            // Create the iframe element
-            const iframe = document.createElement('iframe');
-            iframe.src = iframeUrl;
-            iframe.style.position = 'fixed';
-            iframe.style.bottom = '10px';
-            iframe.style.right = '10px';
-            iframe.style.height = height || '100%';
-            iframe.style.maxHeight = '600px';
-            iframe.style.overflowY = 'auto';
-            iframe.style.width = width || 'auto';
-            iframe.style.zIndex = '100';
-            iframe.frameBorder = '0';
 
-            // Append the iframe to the body
-            document.body.appendChild(iframe);
+    const iframe = document.createElement('iframe');
+    iframe.src = iframeUrl;
+    iframe.style.zIndex = '100';
+    iframe.style.border = '0';
+    iframe.style.overflowY = 'auto';
+
+    // Check screen size
+    const isLaptop = window.matchMedia('(min-width: 1024px)').matches;
+
+    if (isLaptop) {
+      // Desktop layout
+      iframe.style.position = 'fixed';
+      iframe.style.bottom = '10px';
+      iframe.style.right = '10px';
+      iframe.style.width = width ? `${width}px` : '360px';
+      iframe.style.height = height ? `${height}px` : '700px';
+    } else {
+      // Mobile layout
+      iframe.style.position = 'fixed';
+      iframe.style.top = '0';
+      iframe.style.left = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+    }
+
+    document.body.appendChild(iframe);
   } else {
-    console.error(
-      "Account and Assistant id's are required."
-    );
+    console.error("Account and Assistant id's are required.");
     return null;
   }
 
