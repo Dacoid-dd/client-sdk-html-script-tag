@@ -16,7 +16,7 @@ const h = ({
       s = t ? `${o}${t}` : o;
     }
     const e = document.createElement("iframe");
-    e.src = s, e.style.zIndex = "100", e.style.border = "0", e.style.overflowY = "auto", window.matchMedia("(min-width: 1024px)").matches ? (e.style.position = "fixed", e.style.bottom = "10px", e.style.right = "10px", e.style.width = r ? `${r}px` : "360px", e.style.height = c ? `${c}px` : "700px") : (e.style.position = "fixed", e.style.top = "0", e.style.left = "0", e.style.width = "100%", e.style.height = "100%"), document.body.appendChild(e);
+    e.src = s, e.style.zIndex = "100", e.style.border = "0", e.style.overflowY = "auto", window.matchMedia("(min-width: 1024px)").matches ? (e.style.position = "fixed", e.style.bottom = "10px", e.style.right = "10px", e.style.width = r ? `${r}` : "360px", e.style.height = c ? `${c}` : "700px") : (e.style.position = "fixed", e.style.top = "0", e.style.left = "0", e.style.width = "100%", e.style.height = "100%"), document.body.appendChild(e);
   } else
     return console.error("Account and Assistant id's are required."), null;
 };
