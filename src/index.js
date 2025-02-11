@@ -41,8 +41,8 @@ const runSDK = ({
       iframe.style.position = 'fixed';
       iframe.style.bottom = '10px';
       iframe.style.right = '10px';
-      iframe.style.width = width ? `${width}px` : '360px';
-      iframe.style.height = height ? `${height}px` : '700px';
+      iframe.style.width = width ? `${width}` : '360px';
+      iframe.style.height = height ? `${height}` : '700px';
     } else {
       // Mobile layout
       iframe.style.position = 'fixed';
