@@ -7,7 +7,7 @@ const runSDK = ({
   env
 }) => {
   if (account_id && asst_id ) {
-    const envUrl = env === 'production' ? 'https://dashboard.dacoidchat.com' : (env === 'local' ? 'http://localhost:5173':'https://chatbot-frontend-i8ao.vercel.app')
+    const envUrl = env === 'production' ? 'https://beta.dacoidchat.com' : (env === 'local' ? 'http://localhost:5173':'https://chatbot-frontend-i8ao.vercel.app')
     const baseUrl =  `${envUrl}/embed/${account_id}/${asst_id}`
     // Helper function to format parameters as a query string
     const formatParams = (paramObj) => {
