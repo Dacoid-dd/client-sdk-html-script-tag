@@ -30,7 +30,7 @@ const runSDK = ({
 
     const iframe = document.createElement('iframe');
     iframe.src = iframeUrl;
-    iframe.style.zIndex = '100';
+    iframe.style.zIndex = '10000';
     iframe.style.border = '0';
     iframe.style.overflowY = 'auto';
 
@@ -41,7 +41,7 @@ const runSDK = ({
     iframe.style.position = 'fixed';
     iframe.style.bottom = '10px';
     iframe.style.right = '10px';
-    iframe.style.width = width ? `${width}` : '360px';
+    iframe.style.width = width ? `${width}` : '375px';
     iframe.style.height = height ? `${height}` : '700px';
     if (!isLaptop) {
       // Mobile layout
