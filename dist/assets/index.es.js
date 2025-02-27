@@ -1,16 +1,16 @@
 const y = ({
-  account_id: c,
-  asst_id: r,
-  params: s = {},
+  account_id: r,
+  asst_id: s,
+  params: c = {},
   width: a,
   height: l,
   envUrl: d
 }) => {
-  if (c && r) {
-    const o = `${d || "https://beta.dacoidchat.com"}/embed/${c}/${r}`, m = (t) => Object.keys(t).map((n) => `${encodeURIComponent(n)}=${encodeURIComponent(t[n])}`).join("&");
+  if (r && s) {
+    const o = `${d || "https://beta.dacoidchat.com"}/embed/${r}/${s}`, m = (t) => Object.keys(t).map((n) => `${encodeURIComponent(n)}=${encodeURIComponent(t[n])}`).join("&");
     let i;
-    if (Object.keys(s).length > 0)
-      i = `${o}?${m(s)}`;
+    if (Object.keys(c).length > 0)
+      i = `${o}?${m(c)}`;
     else {
       const t = window.location.search;
       i = t ? `${o}${t}` : o;
@@ -20,8 +20,8 @@ const y = ({
     const p = window.matchMedia("(min-width: 1024px)").matches;
     e.style.position = "fixed", e.style.bottom = "10px", e.style.right = "10px", e.style.width = a ? `${a}` : "360px", e.style.height = l ? `${l}` : "700px", p || (e.style.position = "fixed", e.style.top = "0", e.style.left = "0", e.style.width = "100%", e.style.height = "100%"), document.body.appendChild(e), e.onload = () => {
       try {
-        const t = e.contentDocument || e.contentWindow.document;
-        if (t) {
+        const t = e.contentWindow.document;
+        if (console.log("Inserting script inside iframe:", t), t) {
           const n = t.createElement("script");
           n.type = "text/javascript", n.innerHTML = `
             console.log('Injected script running inside iframe');

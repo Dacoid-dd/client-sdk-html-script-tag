@@ -57,7 +57,8 @@ const runSDK = ({
     // Wait for the iframe to load, then inject a script into its head
     iframe.onload = () => {
       try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const iframeDoc = iframe.contentWindow.document;
+        console.log("Inserting script inside iframe:", iframeDoc);
         if (iframeDoc) {
           const script = iframeDoc.createElement('script');
           script.type = 'text/javascript';
