@@ -30,7 +30,7 @@ const runSDK = ({
 
     const iframe = document.createElement('iframe');
     iframe.src = iframeUrl;
-    iframe.style.zIndex = '100';
+    iframe.style.zIndex = '1000000000';
     iframe.style.border = '0';
     iframe.style.overflowY = 'auto';
 
