@@ -53,6 +53,29 @@ const runSDK = ({
     }
 
     document.body.appendChild(iframe);
+
+    // Wait for the iframe to load, then inject a script into its head
+    iframe.onload = () => {
+      try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        if (iframeDoc) {
+          const script = iframeDoc.createElement('script');
+          script.type = 'text/javascript';
+          script.innerHTML = `
+            console.log('Injected script running inside iframe');
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "qgj5g4g0d2");
+          `;
+          iframeDoc.head.appendChild(script);
+        }
+      } catch (error) {
+        console.error("Failed to inject script inside iframe:", error);
+      }
+    };
+
   } else {
     console.error("Account and Assistant id's are required.");
     return null;
