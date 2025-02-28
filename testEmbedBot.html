@@ -40,29 +40,34 @@
 <body>
     <div class="container">
         <h1>Embed Bot Test</h1>
-        <p>Below is the embedded bot for testing purposes:</p>
-        <div id="bot-container"></div>
+        <p>This site is purely for test embed bot at bottom right position.</p>
+        
     </div>
 
     <script>
 
 
-        (function (d, t) {
-            var g = document.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-            g.src =
-                "https://cdn.jsdelivr.net/gh/Dacoid-dd/client-sdk-html-script-tag@latest/dist/assets/index.js";
-            g.defer = true;
-            g.async = true;
-            s.parentNode.insertBefore(g, s);
-
-            g.onload = function () {
-                window.dacoidSDK.init({
-                    account_id: '21a9d5df-42b5-477e-9d22-29f3894d2982',
-                    asst_id: 'asst_3zrM2khChzeU3hE0U86IDPA7' //use params:{} to add custom variables
-                });
-            };
-        })(document, "script");
+         (function (d, t) {
+    var g = document.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    g.src =
+      "https://cdn.jsdelivr.net/gh/Dacoid-dd/client-sdk-html-script-tag@latest/dist/assets/index.js?v=2.0.12";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    
+    g.onload = function () {
+      window.dacoidSDK.init({
+        account_id:'a9b3a729-91bc-4b72-bfb7-fa3d6dabed0f',
+        asst_id:'asst_DwVWVhmx7fieCZBfF5Rjhnwf', 
+        params: {},
+       width:'98%',
+       height:'95%',
+       envUrl:'https://chatbot-frontend-i8ao.vercel.app'
+      });
+      
+    };
+  })(document, "script");
 
 
     </script>
