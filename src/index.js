@@ -43,39 +43,30 @@ const runSDK = ({
     iframe.style.right = '10px';
     iframe.style.width = width ? `${width}` : '360px';
     iframe.style.height = height ? `${height}` : '700px';
-    if (!isLaptop) {
-      // Mobile layout
-      iframe.style.position = 'fixed';
-      iframe.style.top = '0';
-      iframe.style.left = '0';
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-    }
+    
+
+    // Function to apply correct styles based on screen size
+    const applyResponsiveStyles = () => {
+      if (window.innerWidth < 1024) {
+        // Mobile layout
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+      } else {
+        // Desktop layout
+        iframe.style.width = width ? `${width}` : '360px';
+        iframe.style.height = height ? `${height}` : '700px';
+      }
+    };
+
+    // Apply styles initially and on window resize
+    applyResponsiveStyles();
+    window.addEventListener('resize', applyResponsiveStyles);
 
     document.body.appendChild(iframe);
 
-    // Wait for the iframe to load, then inject a script into its head
-    iframe.onload = () => {
-      try {
-        const iframeDoc = iframe.contentWindow.document;
-        console.log("Inserting script inside iframe:", iframeDoc);
-        if (iframeDoc) {
-          const script = iframeDoc.createElement('script');
-          script.type = 'text/javascript';
-          script.innerHTML = `
-            console.log('Injected script running inside iframe');
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "qgj5g4g0d2");
-          `;
-          iframeDoc.head.appendChild(script);
-        }
-      } catch (error) {
-        console.error("Failed to inject script inside iframe:", error);
-      }
-    };
+    
 
   } else {
     console.error("Account and Assistant id's are required.");
