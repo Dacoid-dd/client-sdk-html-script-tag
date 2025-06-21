@@ -25,20 +25,20 @@ const runSDK = ({
         .join('&');
     };
 
-    // Determine if this is an external embed (not on the same domain as the embed URL)
+    // Determine if this is an external embed
     const isExternalEmbed = envUrl && window.location.origin !== envUrl;
-
-    // Add external embed parameter to params
-    const embedParams = {
+    
+    // Add isExternalEmbed to params
+    const allParams = {
       ...params,
-      isExternalEmbed: isExternalEmbed ? 'true' : 'false'
+      isExternalEmbed: isExternalEmbed ? "true" : "false"
     };
 
     // Determine the iframe URL based on provided params or current URL parameters
     let iframeUrl;
-    if (Object.keys(embedParams).length > 0) {
+    if (Object.keys(allParams).length > 0) {
       // Use provided params
-      iframeUrl = `${baseUrl}?${formatParams(embedParams)}`;
+      iframeUrl = `${baseUrl}?${formatParams(allParams)}`;
     } else {
       // Use current URL parameters if no params are provided
       const currentUrlParams = window.location.search;
