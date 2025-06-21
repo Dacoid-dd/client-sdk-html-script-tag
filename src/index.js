@@ -25,8 +25,7 @@ const runSDK = ({
         .join('&');
     };
 
-    // Determine if this is an external embed
-    const isExternalEmbed = envUrl && window.location.origin !== envUrl;
+    const isExternalEmbed = true;
     
     // Add isExternalEmbed to params
     const allParams = {
