@@ -8,8 +8,16 @@ const runSDK = ({
 }) => {
   if (account_id && asst_id ) {
 
-    //const envUrl = env === 'production' ? 'https://beta.dacoidchat.com' : (env === 'local' ? 'http://localhost:5173':'https://chatbot-frontend-i8ao.vercel.app')
-    const baseUrl =  `${envUrl || 'https://beta.dacoidchat.com'}/embed/${account_id}/${asst_id}`
+    // Use the provided envUrl if available, otherwise construct from current location
+    let baseUrl;
+    if (envUrl) {
+      baseUrl = `${envUrl}/embed/${account_id}/${asst_id}`;
+    } else {
+      // Fallback to current domain
+      const currentDomain = window.location.origin;
+      baseUrl = `${currentDomain}/embed/${account_id}/${asst_id}`;
+    }
+    
     // Helper function to format parameters as a query string
     const formatParams = (paramObj) => {
       return Object.keys(paramObj)
@@ -27,6 +35,8 @@ const runSDK = ({
       const currentUrlParams = window.location.search;
       iframeUrl = currentUrlParams ? `${baseUrl}${currentUrlParams}` : baseUrl;
     }
+
+    console.log("Loading iframe from:", iframeUrl);
 
     const iframe = document.createElement('iframe');
     iframe.src = iframeUrl;

@@ -1,29 +1,32 @@
-const p = ({
-  account_id: i,
+const $ = ({
+  account_id: l,
   asst_id: r,
   params: d = {},
-  width: n,
-  height: o,
-  envUrl: y
+  width: o,
+  height: s,
+  envUrl: c
 }) => {
-  if (i && r) {
-    const s = `${y || "https://beta.dacoidchat.com"}/embed/${i}/${r}`, m = (t) => Object.keys(t).map((a) => `${encodeURIComponent(a)}=${encodeURIComponent(t[a])}`).join("&");
-    let l;
+  if (l && r) {
+    let n;
+    c ? n = `${c}/embed/${l}/${r}` : n = `${window.location.origin}/embed/${l}/${r}`;
+    const y = (t) => Object.keys(t).map((m) => `${encodeURIComponent(m)}=${encodeURIComponent(t[m])}`).join("&");
+    let i;
     if (Object.keys(d).length > 0)
-      l = `${s}?${m(d)}`;
+      i = `${n}?${y(d)}`;
     else {
       const t = window.location.search;
-      l = t ? `${s}${t}` : s;
+      i = t ? `${n}${t}` : n;
     }
+    console.log("Loading iframe from:", i);
     const e = document.createElement("iframe");
-    e.src = l, e.style.zIndex = "1000000000", e.style.border = "0", e.style.overflowY = "auto", window.matchMedia("(min-width: 1024px)").matches, e.style.position = "fixed", e.style.bottom = "10px", e.style.right = "10px", e.style.width = n ? `${n}` : "360px", e.style.height = o ? `${o}` : "700px";
-    const c = () => {
-      window.innerWidth < 1024 ? (e.style.top = "0", e.style.left = "0", e.style.width = "100%", e.style.height = "100%") : (e.style.width = n ? `${n}` : "360px", e.style.height = o ? `${o}` : "700px");
+    e.src = i, e.style.zIndex = "1000000000", e.style.border = "0", e.style.overflowY = "auto", window.matchMedia("(min-width: 1024px)").matches, e.style.position = "fixed", e.style.bottom = "10px", e.style.right = "10px", e.style.width = o ? `${o}` : "360px", e.style.height = s ? `${s}` : "700px";
+    const a = () => {
+      window.innerWidth < 1024 ? (e.style.top = "0", e.style.left = "0", e.style.width = "100%", e.style.height = "100%") : (e.style.width = o ? `${o}` : "360px", e.style.height = s ? `${s}` : "700px");
     };
-    c(), window.addEventListener("resize", c), document.body.appendChild(e);
+    a(), window.addEventListener("resize", a), document.body.appendChild(e);
   } else
     return console.error("Account and Assistant id's are required."), null;
 };
 window.dacoidSDK = {
-  init: p
+  init: $
 };
